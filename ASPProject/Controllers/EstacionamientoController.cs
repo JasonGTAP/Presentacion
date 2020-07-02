@@ -39,7 +39,7 @@ namespace ASPProject.Controllers
         // GET: Estacionamiento/Create
         public ActionResult Create()
         {
-            ViewBag.idBicicleta = new SelectList(db.Bicicleta, "IdBicicleta", "Marca");
+            ViewBag.idBicicleta = new SelectList(db.Usuario, "IdUsuario", "NombreUsuario");
             ViewBag.idTrabajador = new SelectList(db.Trabajador, "IdTrabajador", "Nombre");
             return View();
         }
@@ -57,6 +57,10 @@ namespace ASPProject.Controllers
 
                 if (estacionamientoDB == null)
                 {
+
+
+                    estacionamientoDB.HoraEntrada = DateTime.Now;
+
                     db.Estacionamiento.Add(estacionamiento);
                     db.SaveChanges();
                     

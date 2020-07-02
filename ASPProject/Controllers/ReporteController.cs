@@ -10,147 +10,112 @@ using Conexion.Models;
 
 namespace ASPProject.Controllers
 {
-    public class BicicletasController : Controller
+    public class ReporteController : Controller
     {
         private ProyectoInacapEntities db = new ProyectoInacapEntities();
 
-
-         
-
-
-
-        // GET: Bicicletas
+        // GET: Reporte
         public ActionResult Index()
         {
-            int id = (int)Session["ID"];
-
-
-
-            List<Bicicleta> listado = db.Bicicleta.Where(x => x.idUsuario == id).ToList();
-
-            // var bicicleta = db.Bicicleta.Include(b => b.Usuario);
-            // return View(bicicleta.ToList());
-            return View(listado);
-
-
+            var reporte = db.Reporte.Include(r => r.Estacionamiento);
+            return View(reporte.ToList());
         }
 
-        // GET: Bicicletas/Details/5
+        // GET: Reporte/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bicicleta bicicleta = db.Bicicleta.Find(id);
-            if (bicicleta == null)
+            Reporte reporte = db.Reporte.Find(id);
+            if (reporte == null)
             {
                 return HttpNotFound();
             }
-            return View(bicicleta);
+            return View(reporte);
         }
 
-        // GET: Bicicletas/Create
+        // GET: Reporte/Create
         public ActionResult Create()
         {
-           //  ViewBag.idUsuario = new SelectList(db.Usuario, "IdUsuario", "NombreUsuario");
+            ViewBag.idEstacionamiento = new SelectList(db.Estacionamiento, "IdEstacionamiento", "IdEstacionamiento");
             return View();
         }
 
-        // POST: Bicicletas/Create
+        // POST: Reporte/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdBicicleta,Marca,Color,Modelo,ImagenBicicleta,idUsuario")] Bicicleta bicicleta)
+        public ActionResult Create([Bind(Include = "IdReporte,FechaReporte,idEstacionamiento")] Reporte reporte)
         {
-            int id = (int)Session["ID"];
-
             if (ModelState.IsValid)
             {
-
-
-                bicicleta.idUsuario = id;
-
-                db.Bicicleta.Add(bicicleta);
+                db.Reporte.Add(reporte);
                 db.SaveChanges();
-                Session["Registro"]="Registro Exitoso";
-              
                 return RedirectToAction("Index");
             }
 
-            ViewBag.idUsuario = new SelectList(db.Usuario, "IdUsuario", "NombreUsuario", bicicleta.idUsuario);
-            return View(bicicleta);
+            ViewBag.idEstacionamiento = new SelectList(db.Estacionamiento, "IdEstacionamiento", "IdEstacionamiento", reporte.idEstacionamiento);
+            return View(reporte);
         }
 
-        // GET: Bicicletas/Edit/5
+        // GET: Reporte/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bicicleta bicicleta = db.Bicicleta.Find(id);
-            if (bicicleta == null)
+            Reporte reporte = db.Reporte.Find(id);
+            if (reporte == null)
             {
                 return HttpNotFound();
             }
-          
-            return View(bicicleta);
+            ViewBag.idEstacionamiento = new SelectList(db.Estacionamiento, "IdEstacionamiento", "IdEstacionamiento", reporte.idEstacionamiento);
+            return View(reporte);
         }
 
-        // POST: Bicicletas/Edit/5
+        // POST: Reporte/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Bicicleta bicicleta)
+        public ActionResult Edit([Bind(Include = "IdReporte,FechaReporte,idEstacionamiento")] Reporte reporte)
         {
-            int id = (int)Session["ID"];
-
-
             if (ModelState.IsValid)
             {
-
-                Bicicleta bicicletaDB = db.Bicicleta.Find(bicicleta.IdBicicleta);
-
-
-                bicicletaDB.Marca = bicicleta.Marca;
-                bicicletaDB.Color = bicicleta.Color;
-                bicicletaDB.Modelo = bicicleta.Modelo;
-                bicicletaDB.ImagenBicicleta = bicicleta.ImagenBicicleta;
-                bicicleta.idUsuario = id;
-
-                
+                db.Entry(reporte).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-           
-            return View(bicicleta);
+            ViewBag.idEstacionamiento = new SelectList(db.Estacionamiento, "IdEstacionamiento", "IdEstacionamiento", reporte.idEstacionamiento);
+            return View(reporte);
         }
 
-        // GET: Bicicletas/Delete/5
+        // GET: Reporte/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bicicleta bicicleta = db.Bicicleta.Find(id);
-            if (bicicleta == null)
+            Reporte reporte = db.Reporte.Find(id);
+            if (reporte == null)
             {
                 return HttpNotFound();
             }
-            return View(bicicleta);
+            return View(reporte);
         }
 
-        // POST: Bicicletas/Delete/5
+        // POST: Reporte/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Bicicleta bicicleta = db.Bicicleta.Find(id);
-            db.Bicicleta.Remove(bicicleta);
+            Reporte reporte = db.Reporte.Find(id);
+            db.Reporte.Remove(reporte);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

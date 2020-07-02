@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<Conexion.Models.Bicicleta>
 
 @{
-                /**/
+    /**/
 
-                /**/
+    /**/
 
-                ViewBag.Title = "Index";
+    ViewBag.Title = "Index";
 }
 
 <head>
@@ -27,89 +27,109 @@
 
 
 
+<br />
+<br />
 
 
 
-
-<body>
+<body class="">
 
     <div class="burbuja">
         <div class="burbuja2"></div>
     </div>
 
-    <br />
-    <br />
-    <br />
 
-    <h2>@Session["User"]</h2>
-    <p class="text-center"> @Html.ActionLink("Crear nueva Bicicleta ", "Create")</p>
+    @{if (Session["Registro"] !=null)
+        {
 
-    
-
-
-    <div class="text-center container">
+            <div class="alert alert-success text-center" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                 Bicicleta Agregada Correctamente
+            </div>
 
 
-        <table class="table   bg-white container  container-center border">
-            <tr>
-
-              
-                <th>
-                    @Html.DisplayNameFor(model => model.Marca)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Color)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Modelo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ImagenBicicleta)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Usuario.NombreUsuario)
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr>
+        } }
 
 
-                   
+    <div class="modal-body">
+        <p class="text-center"> @Html.ActionLink("Crear nueva Bicicleta ", "Create")</p>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Marca)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Color)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Modelo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ImagenBicicleta)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Usuario.NombreUsuario)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Editar", "Edit", new { id = item.IdBicicleta }) |
-                        @Html.ActionLink("Detalles", "Details", new { id = item.IdBicicleta }) |
-                        @Html.ActionLink("Eliminar", "Delete", new { id = item.IdBicicleta })
-                    </td>
+
+
+
+        <div class="text-center  container">
+
+
+            <table class="table  container bg-white container-center ">
+                <tr class="thead-dark">
+
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Marca)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Color)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Modelo)
+                    </th>
+                    <th>
+                        Imagen Bicicleta
+                    </th>
+                    <th>
+                        Nombre de Usuario
+                    </th>
+
+                    <th></th>
                 </tr>
-            }
 
-        </table>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Marca)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Color)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Modelo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ImagenBicicleta)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Usuario.NombreUsuario)
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.IdBicicleta }) |
+                            @Html.ActionLink("Detalles", "Details", new { id = item.IdBicicleta }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.IdBicicleta })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        </div>
 
     </div>
-
-
 
 
 
 
 
 </body>
+
+<script>
+    //Autoclose
+    window.setTimeout(function () {
+        $(".alert").fadeTo(1500, 0).slideDown(1000, function () {
+            $(this).remove();
+        });
+    }, 3000); //2 segundos y desaparece
+</script>  

@@ -153,7 +153,6 @@
       <Schema Namespace="ProyectoInacapModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ProyectoInacapEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Trabajador" EntityType="ProyectoInacapModel.Trabajador" />
-          <EntitySet Name="Reporte" EntityType="ProyectoInacapModel.Reporte" />
           <EntitySet Name="Bicicleta" EntityType="ProyectoInacapModel.Bicicleta" />
           <EntitySet Name="Estacionamiento" EntityType="ProyectoInacapModel.Estacionamiento" />
           <AssociationSet Name="FK_Estacionamiento_Bicicleta" Association="ProyectoInacapModel.FK_Estacionamiento_Bicicleta">
@@ -164,10 +163,6 @@
             <End Role="Trabajador" EntitySet="Trabajador" />
             <End Role="Estacionamiento" EntitySet="Estacionamiento" />
           </AssociationSet>
-          <AssociationSet Name="FK_Reporte_Estacionamiento" Association="ProyectoInacapModel.FK_Reporte_Estacionamiento">
-            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
-            <End Role="Reporte" EntitySet="Reporte" />
-          </AssociationSet>
           <EntitySet Name="Usuario" EntityType="ProyectoInacapModel.Usuario" />
           <AssociationSet Name="FK_Bicicleta_Usuario" Association="ProyectoInacapModel.FK_Bicicleta_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -176,6 +171,11 @@
           <AssociationSet Name="FK_Trabajador_Usuario" Association="ProyectoInacapModel.FK_Trabajador_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Trabajador" EntitySet="Trabajador" />
+          </AssociationSet>
+          <EntitySet Name="Reporte" EntityType="ProyectoInacapModel.Reporte" />
+          <AssociationSet Name="FK_Reporte_Estacionamiento" Association="ProyectoInacapModel.FK_Reporte_Estacionamiento">
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+            <End Role="Reporte" EntitySet="Reporte" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Trabajador">
@@ -188,15 +188,6 @@
           <Property Name="idUsuario" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Estacionamiento" Relationship="ProyectoInacapModel.FK_Estacionamiento_Trabajador" FromRole="Trabajador" ToRole="Estacionamiento" />
           <NavigationProperty Name="Usuario" Relationship="ProyectoInacapModel.FK_Trabajador_Usuario" FromRole="Trabajador" ToRole="Usuario" />
-        </EntityType>
-        <EntityType Name="Reporte">
-          <Key>
-            <PropertyRef Name="IdReporte" />
-          </Key>
-          <Property Name="IdReporte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FechaReporte" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="idEstacionamiento" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Estacionamiento" Relationship="ProyectoInacapModel.FK_Reporte_Estacionamiento" FromRole="Reporte" ToRole="Estacionamiento" />
         </EntityType>
         <EntityType Name="Bicicleta">
           <Key>
@@ -250,18 +241,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Reporte_Estacionamiento">
-          <End Type="ProyectoInacapModel.Estacionamiento" Role="Estacionamiento" Multiplicity="1" />
-          <End Type="ProyectoInacapModel.Reporte" Role="Reporte" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estacionamiento">
-              <PropertyRef Name="IdEstacionamiento" />
-            </Principal>
-            <Dependent Role="Reporte">
-              <PropertyRef Name="idEstacionamiento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="IdUsuario" />
@@ -303,6 +282,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Reporte">
+          <Key>
+            <PropertyRef Name="IdReporte" />
+          </Key>
+          <Property Name="IdReporte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaReporte" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idEstacionamiento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Estacionamiento" Relationship="ProyectoInacapModel.FK_Reporte_Estacionamiento" FromRole="Reporte" ToRole="Estacionamiento" />
+        </EntityType>
+        <Association Name="FK_Reporte_Estacionamiento">
+          <End Type="ProyectoInacapModel.Estacionamiento" Role="Estacionamiento" Multiplicity="1" />
+          <End Type="ProyectoInacapModel.Reporte" Role="Reporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estacionamiento">
+              <PropertyRef Name="IdEstacionamiento" />
+            </Principal>
+            <Dependent Role="Reporte">
+              <PropertyRef Name="idEstacionamiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -316,15 +316,6 @@
                 <ScalarProperty Name="Cargo" ColumnName="Cargo" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="IdTrabajador" ColumnName="IdTrabajador" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Reporte">
-            <EntityTypeMapping TypeName="ProyectoInacapModel.Reporte">
-              <MappingFragment StoreEntitySet="Reporte">
-                <ScalarProperty Name="idEstacionamiento" ColumnName="idEstacionamiento" />
-                <ScalarProperty Name="FechaReporte" ColumnName="FechaReporte" />
-                <ScalarProperty Name="IdReporte" ColumnName="IdReporte" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -366,6 +357,15 @@
                 <ScalarProperty Name="ApellidoUsuario" ColumnName="ApellidoUsuario" />
                 <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reporte">
+            <EntityTypeMapping TypeName="ProyectoInacapModel.Reporte">
+              <MappingFragment StoreEntitySet="Reporte">
+                <ScalarProperty Name="idEstacionamiento" ColumnName="idEstacionamiento" />
+                <ScalarProperty Name="FechaReporte" ColumnName="FechaReporte" />
+                <ScalarProperty Name="IdReporte" ColumnName="IdReporte" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -16,7 +16,7 @@ namespace ASPProject.Controllers
 
         private ProyectoInacapEntities db = new ProyectoInacapEntities();
 
-
+        public int id;
 
         public ActionResult Administrador() {
 
@@ -56,7 +56,7 @@ namespace ASPProject.Controllers
 
                 Session["User"] = oUser.NombreUsuario;
                 Session["Rol"] = oUser.RolUsuario;
-
+                Session["ID"] = oUser.IdUsuario;
 
 
                 return RedirectToAction("Index", "Home");
@@ -109,7 +109,8 @@ namespace ASPProject.Controllers
                     Session["TDO"] = usuarioDB;
                     Session["User"] = Nombre;
                     Session["Rol"] = "Cliente";
-                    Session["ID"] = usuarioDB.IdUsuario;
+                   Session["ID"] = usuarioDB.IdUsuario;
+                  id = (int)Session["ID"];
                     db.SaveChanges();
                     return RedirectToAction("Index", "Home");
 
@@ -184,6 +185,7 @@ namespace ASPProject.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 db.Usuario.Add(usuario);
                 db.SaveChanges();
                 return RedirectToAction("Index");
