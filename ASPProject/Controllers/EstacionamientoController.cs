@@ -49,32 +49,44 @@ namespace ASPProject.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( Estacionamiento estacionamiento)
+        public ActionResult Create(Estacionamiento estacionamiento)
         {
-            if (ModelState.IsValid)             
+
+            Estacionamiento estacionamientoDB = db.Estacionamiento.Where(x => x.LugarEstacionamiento == estacionamiento.LugarEstacionamiento).FirstOrDefault();
+
+            
+            
+
+
+
+                if (ModelState.IsValid)
             {
-                Estacionamiento estacionamientoDB = db.Estacionamiento.Where(x => x.LugarEstacionamiento == estacionamiento.LugarEstacionamiento).FirstOrDefault();
 
                 if (estacionamientoDB == null)
                 {
 
+                    estacionamiento.HoraEntrada = DateTime.Now;
+                    estacionamiento.HoraSalida = null;
 
-                    estacionamientoDB.HoraEntrada = DateTime.Now;
+
 
                     db.Estacionamiento.Add(estacionamiento);
                     db.SaveChanges();
-                    
-
-                }
-                else {
-                   
-
+                    return RedirectToAction("Index");
                 }
 
-                
-                return RedirectToAction("Index");
+                else
+                {
+                    return RedirectToAction("Index");
+
+                }
 
             }
+        
+
+
+                
+              
 
             ViewBag.idBicicleta = new SelectList(db.Bicicleta, "IdBicicleta", "Marca", estacionamiento.idBicicleta);
             ViewBag.idTrabajador = new SelectList(db.Trabajador, "IdTrabajador", "Nombre", estacionamiento.idTrabajador);
@@ -103,7 +115,7 @@ namespace ASPProject.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdEstacionamiento,LugarEstacionamiento,HoraEntrada,HoraSalida,EstacionamientoOcupado,idBicicleta,idTrabajador")] Estacionamiento estacionamiento)
+        public ActionResult Edit( Estacionamiento estacionamiento)
         {
             if (ModelState.IsValid)
             {
