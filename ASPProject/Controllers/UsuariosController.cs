@@ -80,7 +80,7 @@ namespace ASPProject.Controllers
 
 
 
-        public ActionResult JJ(string Nombre,string Apellidos,int Telefono,string Direccion,int rut,string email,string pass1,string pass2) {
+        public ActionResult JJ(string Nombre,int Telefono,string Direccion,int rut,string email,string pass1,string pass2) {
 
 
            
@@ -92,7 +92,7 @@ namespace ASPProject.Controllers
                 if (pass1 == pass2)
                 {
                     usuarioDB.NombreUsuario = Nombre;
-                    usuarioDB.ApellidoUsuario = Apellidos;
+                    usuarioDB.ApellidoUsuario ="Null";
                     usuarioDB.TelefonoUsuario = Telefono;
                     usuarioDB.DireccionUsuario = Direccion;
                     usuarioDB.RutUsuario = rut;
@@ -106,12 +106,13 @@ namespace ASPProject.Controllers
 
                     db.Usuario.Add(usuarioDB);
 
-                    Session["TDO"] = usuarioDB;
+                 
                     Session["User"] = Nombre;
                     Session["Rol"] = "Cliente";
                    Session["ID"] = usuarioDB.IdUsuario;
-                  id = (int)Session["ID"];
+                 
                     db.SaveChanges();
+
                     return RedirectToAction("Index", "Home");
 
                 }

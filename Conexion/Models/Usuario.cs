@@ -17,8 +17,8 @@ namespace Conexion.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
-            this.Bicicleta = new HashSet<Bicicleta>();
             this.Trabajador = new HashSet<Trabajador>();
+            this.Bicicleta = new HashSet<Bicicleta>();
         }
     
         public int IdUsuario { get; set; }
@@ -33,8 +33,8 @@ namespace Conexion.Models
         public string RolUsuario { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bicicleta> Bicicleta { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Trabajador> Trabajador { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Bicicleta> Bicicleta { get; set; }
     }
 }

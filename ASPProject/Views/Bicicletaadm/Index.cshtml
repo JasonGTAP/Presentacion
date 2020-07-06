@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Conexion.Models.Bicicleta>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+<br />
+<br />
+<br />
+
+<p class="text-center">
+    @Html.ActionLink("Crear nueva bicicleta", "Create")
+</p>
+<table class="table container container-center border">
+    <tr class="thead-dark">
+        <th>
+            @Html.DisplayNameFor(model => model.Marca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modelo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImagenBicicleta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario.NombreUsuario)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Marca)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Color)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modelo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImagenBicicleta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.NombreUsuario)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdBicicleta }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdBicicleta }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdBicicleta })
+        </td>
+    </tr>
+}
+
+</table>

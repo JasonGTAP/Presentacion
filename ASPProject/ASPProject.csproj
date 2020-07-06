@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BicicletaadmController.cs" />
     <Compile Include="Controllers\BicicletasController.cs" />
     <Compile Include="Controllers\EstacionamientoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -187,6 +188,7 @@
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\normalize.css" />
     <Content Include="Content\css\style.responsive.css" />
+    <Content Include="Content\css\astyles.css" />
     <Content Include="Content\css\styles.css" />
     <Content Include="Content\js\scripts.js" />
     <Content Include="favicon.ico" />
@@ -352,9 +354,15 @@
     <Content Include="Views\Reporte\Details.cshtml" />
     <Content Include="Views\Reporte\Edit.cshtml" />
     <Content Include="Views\Reporte\Index.cshtml" />
+    <Content Include="Views\Bicicletaadm\Create.cshtml" />
+    <Content Include="Views\Bicicletaadm\Delete.cshtml" />
+    <Content Include="Views\Bicicletaadm\Details.cshtml" />
+    <Content Include="Views\Bicicletaadm\Edit.cshtml" />
+    <Content Include="Views\Bicicletaadm\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\img\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

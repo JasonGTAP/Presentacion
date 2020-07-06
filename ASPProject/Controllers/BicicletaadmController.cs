@@ -10,88 +10,18 @@ using Conexion.Models;
 
 namespace ASPProject.Controllers
 {
-    public class BicicletasController : Controller
+    public class BicicletaadmController : Controller
     {
         private ProyectoInacapEntities db = new ProyectoInacapEntities();
 
-
-     
-
-
-        public string foto = "";
-
-      
-
-
-        
-
-
-        // GET: Bicicletas
+        // GET: Bicicletaadm
         public ActionResult Index()
         {
-            int id = (int)Session["ID"];
-
-
-
-            List<Bicicleta> listado = db.Bicicleta.Where(x => x.idUsuario == id).ToList();
-
-            // var bicicleta = db.Bicicleta.Include(b => b.Usuario);
-            // return View(bicicleta.ToList());
-            return View(listado);
-
-
+            var bicicleta = db.Bicicleta.Include(b => b.Usuario);
+            return View(bicicleta.ToList());
         }
 
-
-
-
-        [HttpPost]
-        public ActionResult SubirBicicleta(HttpPostedFileBase file, string marca, string color, string modelo)
-        {
-            Bicicleta bicicletadb = new Bicicleta();
-
-
-            int id = (int)Session["ID"];
-
-
-
-            string relativo = "/Content/img/";
-            string ruta = Server.MapPath(relativo);
-            file.SaveAs(ruta + file.FileName);
-            foto = relativo + file.FileName;
-
-            bicicletadb.idUsuario = id;
-            bicicletadb.Marca = marca;
-            bicicletadb.Color = color;
-            bicicletadb.Modelo = modelo;
-
-            bicicletadb.ImagenBicicleta = foto;
-
-            db.Bicicleta.Add(bicicletadb);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-
-
-
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // GET: Bicicletas/Details/5
+        // GET: Bicicletaadm/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -106,32 +36,24 @@ namespace ASPProject.Controllers
             return View(bicicleta);
         }
 
-        // GET: Bicicletas/Create
+        // GET: Bicicletaadm/Create
         public ActionResult Create()
         {
-           //  ViewBag.idUsuario = new SelectList(db.Usuario, "IdUsuario", "NombreUsuario");
+            ViewBag.idUsuario = new SelectList(db.Usuario, "IdUsuario", "NombreUsuario");
             return View();
         }
 
-        // POST: Bicicletas/Create
+        // POST: Bicicletaadm/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "IdBicicleta,Marca,Color,Modelo,ImagenBicicleta,idUsuario")] Bicicleta bicicleta)
         {
-            int id = (int)Session["ID"];
-
             if (ModelState.IsValid)
             {
-
-
-                bicicleta.idUsuario = id;
-
                 db.Bicicleta.Add(bicicleta);
                 db.SaveChanges();
-                Session["Registro"]="Registro Exitoso";
-              
                 return RedirectToAction("Index");
             }
 
@@ -139,7 +61,7 @@ namespace ASPProject.Controllers
             return View(bicicleta);
         }
 
-        // GET: Bicicletas/Edit/5
+        // GET: Bicicletaadm/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -151,41 +73,28 @@ namespace ASPProject.Controllers
             {
                 return HttpNotFound();
             }
-          
+            ViewBag.idUsuario = new SelectList(db.Usuario, "IdUsuario", "NombreUsuario", bicicleta.idUsuario);
             return View(bicicleta);
         }
 
-        // POST: Bicicletas/Edit/5
+        // POST: Bicicletaadm/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Bicicleta bicicleta)
+        public ActionResult Edit([Bind(Include = "IdBicicleta,Marca,Color,Modelo,ImagenBicicleta,idUsuario")] Bicicleta bicicleta)
         {
-            int id = (int)Session["ID"];
-
-
             if (ModelState.IsValid)
             {
-
-                Bicicleta bicicletaDB = db.Bicicleta.Find(bicicleta.IdBicicleta);
-
-
-                bicicletaDB.Marca = bicicleta.Marca;
-                bicicletaDB.Color = bicicleta.Color;
-                bicicletaDB.Modelo = bicicleta.Modelo;
-                bicicletaDB.ImagenBicicleta = bicicletaDB.ImagenBicicleta;
-                bicicleta.idUsuario = id;
-
-                
+                db.Entry(bicicleta).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-           
+            ViewBag.idUsuario = new SelectList(db.Usuario, "IdUsuario", "NombreUsuario", bicicleta.idUsuario);
             return View(bicicleta);
         }
 
-        // GET: Bicicletas/Delete/5
+        // GET: Bicicletaadm/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -200,7 +109,7 @@ namespace ASPProject.Controllers
             return View(bicicleta);
         }
 
-        // POST: Bicicletas/Delete/5
+        // POST: Bicicletaadm/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

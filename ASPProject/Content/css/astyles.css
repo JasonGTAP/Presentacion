@@ -159,9 +159,9 @@ sup {
 }
 
 a {
-    color: #c10504;
-    text-decoration: none;
-    background-color: transparent;
+  color: #f4623a;
+  text-decoration: none;
+  background-color: transparent;
 }
 a:hover {
   color: #d6370c;
@@ -2470,9 +2470,9 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #c10504;
-    border-color: #f4623a;
+  color: #fff;
+  background-color: #f4623a;
+  border-color: #f4623a;
 }
 .btn-primary:hover {
   color: #fff;
@@ -4025,6 +4025,7 @@ input[type=button].btn-block {
 }
 
 .navbar-text {
+    color:#212529;
   display: inline-block;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -6095,7 +6096,7 @@ a.close.disabled {
 }
 
 .bg-primary {
-    background-color: #C10504 !important;
+  background-color: #f4623a !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
@@ -9797,7 +9798,7 @@ button.bg-dark:focus {
 }
 
 .text-primary {
-    color: #C10504 !important;
+  color: #f4623a !important;
 }
 
 a.text-primary:hover, a.text-primary:focus {
@@ -10005,9 +10006,9 @@ html {
 }
 
 hr.divider {
-    max-width: 3.25rem;
-    border-width: 0.2rem;
-    border-color: #C10504;
+  max-width: 3.25rem;
+  border-width: 0.2rem;
+  border-color: #f4623a;
 }
 
 hr.light {
@@ -10051,9 +10052,9 @@ hr.light {
 #mainNav .navbar-nav .nav-item .nav-link:hover, #mainNav .navbar-nav .nav-item .nav-link:active {
   color: #f4623a;
 }
-    #mainNav .navbar-nav .nav-item .nav-link.active {
-        color: #f8f9fa !important;
-    }
+#mainNav .navbar-nav .nav-item .nav-link.active {
+  color: #f4623a !important;
+}
 @media (min-width: 992px) {
   #mainNav {
     box-shadow: none;
@@ -10082,15 +10083,15 @@ hr.light {
   #mainNav.navbar-scrolled .navbar-brand {
     color: #212529;
   }
-    #mainNav.navbar-scrolled .navbar-brand:hover {
-        color: #f8f9fa;
-    }
+  #mainNav.navbar-scrolled .navbar-brand:hover {
+    color: #f4623a;
+  }
   #mainNav.navbar-scrolled .navbar-nav .nav-item .nav-link {
     color: #212529;
   }
-    #mainNav.navbar-scrolled .navbar-nav .nav-item .nav-link:hover {
-        color: /*#f4623a*/ #f8f9fa;
-    }
+  #mainNav.navbar-scrolled .navbar-nav .nav-item .nav-link:hover {
+    color: #f4623a;
+  }
 }
 
 header.masthead {
@@ -10144,7 +10145,7 @@ header.masthead h1 {
   text-align: center;
   opacity: 0;
   color: #fff;
-  background: rgba(193, 5, 4, 0.91);
+  background: rgba(244, 98, 58, 0.9);
   transition: opacity 0.25s ease;
   text-align: center;
 }

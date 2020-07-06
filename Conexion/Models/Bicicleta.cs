@@ -24,11 +24,11 @@ namespace Conexion.Models
         public string Marca { get; set; }
         public string Color { get; set; }
         public string Modelo { get; set; }
-        public byte[] ImagenBicicleta { get; set; }
+        public string ImagenBicicleta { get; set; }
         public int idUsuario { get; set; }
     
+        public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Estacionamiento> Estacionamiento { get; set; }
-        public virtual Usuario Usuario { get; set; }
     }
 }
