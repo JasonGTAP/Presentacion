@@ -13,65 +13,120 @@
 <br />
 <br />
 
-<p class="text-center">
-    @Html.ActionLink("Crear Nuevo Estacionamiento", "Create")
-</p>
+<h1 class="text-center text-dark">Estacionamiento</h1>
 
 
 
 
 
+<table class="table container border ">
+    <tr class="thead-dark">
+        <th class="text-center">
+            Estacionamiento N°
+        </th>
+        <th class="text-center">
+            Hora Ingreso
+        </th>
 
-<table class="table container ">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.LugarEstacionamiento)
+        <th class="text-center">
+            ocupado
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HoraEntrada)
+        <th class="text-center">
+            Nombre
+            Usuario
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HoraSalida)
+        <th class="text-center">
+            Bicicleta
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EstacionamientoOcupado)
+        <th class="text-center">
+            Trabajador
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Bicicleta.IdBicicleta)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Trabajador.Nombre)-trabajador
-        </th>
-        <th></th>
+        <th class="text-center">ↆ</th>
+        <th class="text-center">ↆ</th>
+        <th class="text-center">ↆ</th>
+
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.LugarEstacionamiento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HoraEntrada)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HoraSalida)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstacionamientoOcupado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bicicleta.IdBicicleta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Trabajador.Nombre)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.IdEstacionamiento }) |
-                @Html.ActionLink("Detalles", "Details", new { id = item.IdEstacionamiento }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.IdEstacionamiento })
-            </td>
-        </tr>
+        if (item.EstacionamientoOcupado == false)
+        {
+            <tr class="text-success">
+                <td>
+                    @Html.DisplayFor(modelItem => item.LugarEstacionamiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoraEntrada)
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstacionamientoOcupado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bicicleta.Usuario.NombreUsuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bicicleta.ImagenBicicleta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trabajador.Nombre)
+                </td>
+                <td>
+                    @Html.ActionLink("Asignar  Estacionamiento", "Edit", new { id = item.IdEstacionamiento })
+                </td>
+                <td>
+                    @Html.ActionLink("Detalles Estacionamiento", "Details", new { id = item.IdEstacionamiento })
+
+                </td>
+                <td>
+                    @Html.ActionLink("Desocupar Estacionamiento", "Resolver", new { id = item.IdEstacionamiento })
+                </td>
+            </tr>
+
+
+        }
+        else if(item.EstacionamientoOcupado == true)
+        {
+
+            <tr class="text-danger">
+                <td>
+                    @Html.DisplayFor(modelItem => item.LugarEstacionamiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoraEntrada)
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstacionamientoOcupado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bicicleta.Usuario.NombreUsuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bicicleta.ImagenBicicleta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trabajador.Nombre)
+                </td>
+                <td>
+                    @Html.ActionLink("Asignar  Estacionamiento", "Edit", new { id = item.IdEstacionamiento })
+                </td>
+                <td>
+                    @Html.ActionLink("Detalles Estacionamiento", "Details", new { id = item.IdEstacionamiento })
+
+                </td>
+                <td>
+                    @Html.ActionLink("Desocupar Estacionamiento", "Resolver", new { id = item.IdEstacionamiento })
+                </td>
+            </tr>}
+
+
+
+
+
+    }
     }
 
 </table>

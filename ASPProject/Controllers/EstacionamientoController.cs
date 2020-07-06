@@ -17,9 +17,57 @@ namespace ASPProject.Controllers
         // GET: Estacionamiento
         public ActionResult Index()
         {
-            var estacionamiento = db.Estacionamiento.Include(e => e.Bicicleta).Include(e => e.Trabajador);
-            return View(estacionamiento.ToList());
+
+            
+
+
+            Estacionamiento estacionamientoo = new Estacionamiento();
+
+            //Estacionamiento[] arreglo = new Estacionamiento[30];
+            //arreglo[1] = estacionamientoo;
+
+            List<Estacionamiento> estacionamientoss = db.Estacionamiento.Where(x => x.LugarEstacionamiento>0).ToList();
+           
+
+
+
+
+            //var estacionamiento = db.Estacionamiento.Include(e => e.Bicicleta).Include(e => e.Trabajador);
+            //return View(estacionamiento.ToList());
+
+            return View(estacionamientoss.ToList());
+
         }
+
+
+
+
+
+
+        public  ActionResult Resolver(int? id) {
+
+              Estacionamiento estacionamientodb = db.Estacionamiento.Find(id);
+
+
+            estacionamientodb.LugarEstacionamiento = estacionamientodb.LugarEstacionamiento;
+            estacionamientodb.HoraEntrada = DateTime.Parse("2020/01/01");
+            estacionamientodb.EstacionamientoOcupado = false;
+            estacionamientodb.idBicicleta = 2029;
+            estacionamientodb.idTrabajador = 5;
+
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
+            
+        }
+
+
+
+
+
+
+
+
 
         // GET: Estacionamiento/Details/5
         public ActionResult Details(int? id)
@@ -105,6 +153,9 @@ namespace ASPProject.Controllers
             {
                 return HttpNotFound();
             }
+
+
+
             ViewBag.idBicicleta = new SelectList(db.Bicicleta, "IdBicicleta", "Marca", estacionamiento.idBicicleta);
             ViewBag.idTrabajador = new SelectList(db.Trabajador, "IdTrabajador", "Nombre", estacionamiento.idTrabajador);
             return View(estacionamiento);
@@ -119,7 +170,15 @@ namespace ASPProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(estacionamiento).State = EntityState.Modified;
+
+                Estacionamiento estacionamientoDB = db.Estacionamiento.Find(estacionamiento.IdEstacionamiento);
+
+                estacionamientoDB.LugarEstacionamiento = estacionamientoDB.LugarEstacionamiento;
+                estacionamientoDB.HoraEntrada = DateTime.Now;
+                estacionamientoDB.EstacionamientoOcupado = estacionamiento.EstacionamientoOcupado;
+                estacionamientoDB.idBicicleta = estacionamiento.idBicicleta;
+                estacionamientoDB.idTrabajador = estacionamiento.idTrabajador;
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -144,18 +203,29 @@ namespace ASPProject.Controllers
         }
 
         // POST: Estacionamiento/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
 
-
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(Estacionamiento estacionamiento)
         {
 
+            if (ModelState.IsValid)
+            {
 
-            Estacionamiento estacionamiento = db.Estacionamiento.Find(id);
-            db.Estacionamiento.Remove(estacionamiento);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+                Estacionamiento estacionamientodb = db.Estacionamiento.Find(estacionamiento.IdEstacionamiento);
+
+                estacionamientodb.LugarEstacionamiento = estacionamiento.LugarEstacionamiento;
+                estacionamientodb.HoraEntrada = DateTime.Parse("2020/01/01");
+                estacionamientodb.EstacionamientoOcupado = false;
+                estacionamientodb.idBicicleta = 2;
+                estacionamientodb.idTrabajador = 1;
+
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.idBicicleta = new SelectList(db.Bicicleta, "IdBicicleta", "Marca", estacionamiento.idBicicleta);
+            ViewBag.idTrabajador = new SelectList(db.Trabajador, "IdTrabajador", "Nombre", estacionamiento.idTrabajador);
+            return View(estacionamiento);
         }
 
         protected override void Dispose(bool disposing)
