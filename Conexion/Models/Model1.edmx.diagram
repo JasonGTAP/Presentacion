@@ -10,11 +10,11 @@
         <AssociationConnector Association="ProyectoInacapModel.FK_Estacionamiento_Trabajador" />
         <EntityTypeShape EntityType="ProyectoInacapModel.Usuario" Width="1.5" PointX="0.75" PointY="2.125" />
         <AssociationConnector Association="ProyectoInacapModel.FK_Trabajador_Usuario" />
-        <EntityTypeShape EntityType="ProyectoInacapModel.Reporte" Width="1.5" PointX="7.5" PointY="3" />
-        <AssociationConnector Association="ProyectoInacapModel.FK_Reporte_Estacionamiento" />
         <EntityTypeShape EntityType="ProyectoInacapModel.Bicicleta" Width="1.5" PointX="3" PointY="0.75" />
         <AssociationConnector Association="ProyectoInacapModel.FK_Bicicleta_Usuario" />
         <AssociationConnector Association="ProyectoInacapModel.FK_Estacionamiento_Bicicleta" />
+        <EntityTypeShape EntityType="ProyectoInacapModel.Reporte" Width="1.5" PointX="7.5" PointY="2.625" />
+        <AssociationConnector Association="ProyectoInacapModel.FK_Reporte_Estacionamiento" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

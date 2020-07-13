@@ -74,7 +74,7 @@ namespace ASPProject.Controllers
 
             Session["User"] = null;
             Session["Rol"] = null;
-
+            Session["ID"] = null;
             return RedirectToAction("Index","Home");
         }
 
@@ -101,33 +101,33 @@ namespace ASPProject.Controllers
                     usuarioDB.CorreoUsuario = email;
                     usuarioDB.RolUsuario = "Cliente";
 
-                 
-                    
 
                     db.Usuario.Add(usuarioDB);
-
-                 
-                    Session["User"] = Nombre;
-                    Session["Rol"] = "Cliente";
-                   Session["ID"] = usuarioDB.IdUsuario;
-                 
                     db.SaveChanges();
 
-                    return RedirectToAction("Index", "Home");
 
+                    Session["User"] = Nombre;
+                    Session["Rol"] = "Cliente";
+                    Session["ID"] = usuarioDB.IdUsuario;
+
+
+                }
+                else
+                {
+
+                    ViewBag.error = "complete los datos nuevamente";
+                    return View("Registro");
                 }
 
 
 
             }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
 
 
 
-            return RedirectToAction("Index", "Home");
+
+
+            return RedirectToAction("Index","Home");
 
 
         }
@@ -170,6 +170,27 @@ namespace ASPProject.Controllers
             }
             return View(usuario);
         }
+
+
+        public ActionResult Perfil()
+        {
+            int id = (int)Session["ID"];
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Usuario usuario = db.Usuario.Find(id);
+            if (usuario == null)
+            {
+                return HttpNotFound();
+            }
+            return View(usuario);
+        }
+
+
+
+
 
         // GET: Usuarios/Create
         public ActionResult Create()

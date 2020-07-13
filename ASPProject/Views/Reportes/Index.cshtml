@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Conexion.Models.Reporte>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<br />
+<br />
+<br />
+<br />
+<h2 class="text-center text-primary">Reportes de los Estacionamientos</h2>
+<table class="table">
+    <tr class="thead-dark">
+        <th>
+            @Html.DisplayNameFor(model => model.LugarEstacionamiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaEntrada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaSalida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreUsuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NombreTrabajador)
+        </th>
+      
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.LugarEstacionamiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaEntrada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaSalida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreUsuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NombreTrabajador)
+        </td>
+      
+    
+    </tr>
+}
+
+</table>

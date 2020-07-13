@@ -133,7 +133,7 @@
     <Compile Include="Controllers\BicicletasController.cs" />
     <Compile Include="Controllers\EstacionamientoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ReporteController.cs" />
+    <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\TrabajadorController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
@@ -349,16 +349,17 @@
     <Content Include="Views\Estacionamiento\Edit.cshtml" />
     <Content Include="Views\Estacionamiento\Index.cshtml" />
     <Content Include="Views\Usuarios\Administrador.cshtml" />
-    <Content Include="Views\Reporte\Create.cshtml" />
-    <Content Include="Views\Reporte\Delete.cshtml" />
-    <Content Include="Views\Reporte\Details.cshtml" />
-    <Content Include="Views\Reporte\Edit.cshtml" />
-    <Content Include="Views\Reporte\Index.cshtml" />
     <Content Include="Views\Bicicletaadm\Create.cshtml" />
     <Content Include="Views\Bicicletaadm\Delete.cshtml" />
     <Content Include="Views\Bicicletaadm\Details.cshtml" />
     <Content Include="Views\Bicicletaadm\Edit.cshtml" />
     <Content Include="Views\Bicicletaadm\Index.cshtml" />
+    <Content Include="Views\Usuarios\Perfil.cshtml" />
+    <Content Include="Views\Reportes\Create.cshtml" />
+    <Content Include="Views\Reportes\Delete.cshtml" />
+    <Content Include="Views\Reportes\Details.cshtml" />
+    <Content Include="Views\Reportes\Edit.cshtml" />
+    <Content Include="Views\Reportes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

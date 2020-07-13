@@ -1,0 +1,177 @@
+﻿@model Conexion.Models.Usuario
+@{ ViewBag.Title = "Perfil"; }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/css/main.css">
+    <link rel="stylesheet" href="~/Content/css/normalize.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="~/Content/assets/img/favicon.ico">
+    <link rel="stylesheet" href="~/Content/css/main.css">
+    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+
+    <title>Detalles</title>
+</head>
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="burbuja">
+    <div class="burbuja2"></div>
+</div>
+
+<div @*class="container "*@>
+    <div class="container text-center ">
+
+        <div class="  container-flex ">
+
+            <div class=" form ">
+
+                <br />
+                <h4 class="text-center text-primary">Perfil </h4>
+
+
+                <hr />
+
+                <dl class="dl">
+                    <dt>
+                        @*@Html.DisplayNameFor(model => model.NombreUsuario)*@
+                        Nombre
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.NombreUsuario)
+                    </dd>
+                    <dt>
+                        @*@Html.DisplayNameFor(model => model.TelefonoUsuario)*@
+                        Telefono
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TelefonoUsuario)
+                    </dd>
+                    <dt>
+                        @*@Html.DisplayNameFor(model => model.DireccionUsuario)*@
+                        Direccion
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DireccionUsuario)
+                    </dd>
+                    <dt>
+                        @*@Html.DisplayNameFor(model => model.RutUsuario)*@
+                        Rut
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.RutUsuario)
+                    </dd>
+                    <dt>
+                        @*@Html.DisplayNameFor(model => model.FechaRegistro)*@
+                        Fecha de Registro
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FechaRegistro)
+                    </dd>
+                    <dt>
+                        @*@Html.DisplayNameFor(model => model.CorreoUsuario)*@
+                        Email
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CorreoUsuario)
+                    </dd>
+                
+                    <dt>
+                        @*@Html.DisplayNameFor(model => model.RolUsuario)*@
+                        Rol de Usuario
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.RolUsuario)
+                    </dd>
+
+                </dl>
+                
+
+            </div>
+            <div class="container-formText">
+                <div class="formText">
+                    <h2>Perfil</h2>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*<div class="text-center">
+        <br />
+        <h4>Perfil</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.NombreUsuario)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NombreUsuario)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TelefonoUsuario)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TelefonoUsuario)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DireccionUsuario)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DireccionUsuario)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.RutUsuario)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RutUsuario)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaRegistro)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FechaRegistro)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CorreoUsuario)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CorreoUsuario)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Contraseña)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Contraseña)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.RolUsuario)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.RolUsuario)
+            </dd>
+
+        </dl>
+    </div>
+    <p class="text-center">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.IdUsuario }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

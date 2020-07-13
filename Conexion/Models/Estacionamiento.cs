@@ -29,8 +29,8 @@ namespace Conexion.Models
         public int idTrabajador { get; set; }
     
         public virtual Trabajador Trabajador { get; set; }
+        public virtual Bicicleta Bicicleta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reporte> Reporte { get; set; }
-        public virtual Bicicleta Bicicleta { get; set; }
     }
 }

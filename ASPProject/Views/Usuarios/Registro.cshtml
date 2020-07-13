@@ -20,6 +20,28 @@
     <div class="burbuja">
         <div class="burbuja2"></div>
     </div>
+    @ViewBag.error
+    @ViewBag.correcto
+
+    <br />
+    <br />
+
+
+    @{if (ViewBag.error != null)
+        {
+
+            <div class="alert alert-danger text-center" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                Reingrese nuevamente sus datos Hubo un Error
+            </div>
+
+
+        }
+   
+    }
+
+
+
     <!-- FORMULARIO -->
     <div class="container">
         <div class="container-center">
@@ -30,7 +52,7 @@
                     <div class="form-title">
 
                         <div class="title-infy">
-                            <img src="~/Content/assets/img/logo.png" alt="infy" width="10%">
+                            <img src="~/Content/assets/img/logo.png" alt="infy" width="100">
                             <br />
                             <h1 class="infy">Inacap</h1>
                         </div>
@@ -41,38 +63,38 @@
 
                         <div class="inputs">
                             <i class="fas fa-user-circle"></i>
-                            <input type="text" name="Nombre" placeholder="Nombre Completo">
+                            <input type="text" name="Nombre" required placeholder="Nombre Completo">
                         </div>
 
-                     
+
                         <div class="inputs">
-                            <i class="fas fa-bars"></i>
-                            <input type="text" name="Direccion" placeholder="Ingrese su Direccion">
+                            <i class="fas fa-bars"></i>2
+                            <input type="text" name="Direccion" required placeholder="Ingrese su Direccion">
                         </div>
 
                         <div class="inputs">
                             <i class="fas fa-phone"></i>
-                            <input type="tel" name="Telefono" placeholder="Telefono">
+                            <input type="tel" name="Telefono" required placeholder="Telefono">
                         </div>
 
                         <div class="inputs">
                             <i class="fas fa-id-card"></i>
-                            <input type="number" name="rut" placeholder="Rut">
+                            <input type="number" name="rut" required placeholder="Rut">
                         </div>
 
 
                         <div class="inputs">
                             <i class="fas fa-envelope"></i>
-                            <input type="email" name="email" placeholder="Correo">
+                            <input type="email" name="email" required placeholder="Correo">
                         </div>
 
                         <div class="inputs">
                             <i class="fas fa-lock"></i>
-                            <input type="password" name="pass1" placeholder="Ingresa una Contraseña">
+                            <input type="password" name="pass1" required placeholder="Ingresa una Contraseña">
                         </div>
                         <div class="inputs">
                             <i class="fas fa-lock"></i>
-                            <input type="password" name="pass2" placeholder="Repite la Contraseña">
+                            <input type="password" name="pass2" required placeholder="Repite la Contraseña">
                         </div>
 
 
@@ -105,3 +127,11 @@
     </div>
 </body>
 
+<script>
+    //Autoclose
+    window.setTimeout(function () {
+        $(".alert").fadeTo(1500, 0).slideDown(1000, function () {
+            $(this).remove();
+        });
+    }, 3000); //2 segundos y desaparece
+</script>  

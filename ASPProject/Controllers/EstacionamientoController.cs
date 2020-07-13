@@ -46,15 +46,33 @@ namespace ASPProject.Controllers
 
         public  ActionResult Resolver(int? id) {
 
-              Estacionamiento estacionamientodb = db.Estacionamiento.Find(id);
+
+         Reporte reporte = new Reporte();
+            Estacionamiento estacionamientodb = db.Estacionamiento.Find(id);
+            Trabajador trabajador = db.Trabajador.Where(x => x.IdTrabajador == estacionamientodb.idTrabajador).FirstOrDefault();
+            Usuario usu = db.Usuario.Where(x => x.IdUsuario == estacionamientodb.Bicicleta.idUsuario).FirstOrDefault();
+
+            reporte.idEstacionamiento = estacionamientodb.IdEstacionamiento;
+            reporte.LugarEstacionamiento = estacionamientodb.LugarEstacionamiento;
+            reporte.FechaEntrada = estacionamientodb.HoraEntrada;
+            reporte.FechaSalida = DateTime.Now;
+            reporte.NombreUsuario = usu.NombreUsuario;
+            reporte.NombreTrabajador = trabajador.Nombre;
+
+
 
 
             estacionamientodb.LugarEstacionamiento = estacionamientodb.LugarEstacionamiento;
-            estacionamientodb.HoraEntrada = DateTime.Parse("2020/01/01");
+            estacionamientodb.HoraEntrada = DateTime.Now; //Parse("2020/01/01");
             estacionamientodb.EstacionamientoOcupado = false;
             estacionamientodb.idBicicleta = 2029;
             estacionamientodb.idTrabajador = 5;
 
+
+
+          
+
+            db.Reporte.Add(reporte);
             db.SaveChanges();
             return RedirectToAction("Index");
 
@@ -168,22 +186,27 @@ namespace ASPProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit( Estacionamiento estacionamiento)
         {
+           
+
+            int id = (int)Session["ID"];
+
+            Trabajador tra = db.Trabajador.Where(x=>x.idUsuario==id).FirstOrDefault();
             if (ModelState.IsValid)
             {
-
+                
                 Estacionamiento estacionamientoDB = db.Estacionamiento.Find(estacionamiento.IdEstacionamiento);
 
                 estacionamientoDB.LugarEstacionamiento = estacionamientoDB.LugarEstacionamiento;
                 estacionamientoDB.HoraEntrada = DateTime.Now;
                 estacionamientoDB.EstacionamientoOcupado = estacionamiento.EstacionamientoOcupado;
                 estacionamientoDB.idBicicleta = estacionamiento.idBicicleta;
-                estacionamientoDB.idTrabajador = estacionamiento.idTrabajador;
+                estacionamientoDB.idTrabajador = tra.IdTrabajador;
 
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.idBicicleta = new SelectList(db.Bicicleta, "IdBicicleta", "Marca", estacionamiento.idBicicleta);
-            ViewBag.idTrabajador = new SelectList(db.Trabajador, "IdTrabajador", "Nombre", estacionamiento.idTrabajador);
+            ViewBag.idTrabajador = new SelectList(db.Trabajador, "IdTrabajador", "Nombre",tra.IdTrabajador);
             return View(estacionamiento);
         }
 
@@ -208,7 +231,7 @@ namespace ASPProject.Controllers
 
         public ActionResult DeleteConfirmed(Estacionamiento estacionamiento)
         {
-
+           
             if (ModelState.IsValid)
             {
 
@@ -219,6 +242,11 @@ namespace ASPProject.Controllers
                 estacionamientodb.EstacionamientoOcupado = false;
                 estacionamientodb.idBicicleta = 2;
                 estacionamientodb.idTrabajador = 1;
+
+
+
+          
+
 
                 db.SaveChanges();
                 return RedirectToAction("Index");

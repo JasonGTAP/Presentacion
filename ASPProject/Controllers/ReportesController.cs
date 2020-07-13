@@ -10,18 +10,18 @@ using Conexion.Models;
 
 namespace ASPProject.Controllers
 {
-    public class ReporteController : Controller
+    public class ReportesController : Controller
     {
         private ProyectoInacapEntities db = new ProyectoInacapEntities();
 
-        // GET: Reporte
+        // GET: Reportes
         public ActionResult Index()
         {
             var reporte = db.Reporte.Include(r => r.Estacionamiento);
             return View(reporte.ToList());
         }
 
-        // GET: Reporte/Details/5
+        // GET: Reportes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,19 +36,19 @@ namespace ASPProject.Controllers
             return View(reporte);
         }
 
-        // GET: Reporte/Create
+        // GET: Reportes/Create
         public ActionResult Create()
         {
             ViewBag.idEstacionamiento = new SelectList(db.Estacionamiento, "IdEstacionamiento", "IdEstacionamiento");
             return View();
         }
 
-        // POST: Reporte/Create
+        // POST: Reportes/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdReporte,FechaReporte,idEstacionamiento")] Reporte reporte)
+        public ActionResult Create([Bind(Include = "IdReporte,LugarEstacionamiento,FechaEntrada,FechaSalida,idEstacionamiento,NombreUsuario,NombreTrabajador")] Reporte reporte)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +61,7 @@ namespace ASPProject.Controllers
             return View(reporte);
         }
 
-        // GET: Reporte/Edit/5
+        // GET: Reportes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -77,12 +77,12 @@ namespace ASPProject.Controllers
             return View(reporte);
         }
 
-        // POST: Reporte/Edit/5
+        // POST: Reportes/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdReporte,FechaReporte,idEstacionamiento")] Reporte reporte)
+        public ActionResult Edit([Bind(Include = "IdReporte,LugarEstacionamiento,FechaEntrada,FechaSalida,idEstacionamiento,NombreUsuario,NombreTrabajador")] Reporte reporte)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace ASPProject.Controllers
             return View(reporte);
         }
 
-        // GET: Reporte/Delete/5
+        // GET: Reportes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -109,7 +109,7 @@ namespace ASPProject.Controllers
             return View(reporte);
         }
 
-        // POST: Reporte/Delete/5
+        // POST: Reportes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

@@ -15,8 +15,12 @@ namespace Conexion.Models
     public partial class Reporte
     {
         public int IdReporte { get; set; }
-        public System.DateTime FechaReporte { get; set; }
+        public int LugarEstacionamiento { get; set; }
+        public System.DateTime FechaEntrada { get; set; }
+        public System.DateTime FechaSalida { get; set; }
         public int idEstacionamiento { get; set; }
+        public string NombreUsuario { get; set; }
+        public string NombreTrabajador { get; set; }
     
         public virtual Estacionamiento Estacionamiento { get; set; }
     }

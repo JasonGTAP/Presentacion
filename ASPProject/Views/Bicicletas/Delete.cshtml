@@ -84,7 +84,7 @@
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.ImagenBicicleta)
+                       <img src="@Html.DisplayFor(model => model.ImagenBicicleta)" width="100" />
                     </dd>
 
                     <dt>
@@ -102,7 +102,7 @@
                     @Html.AntiForgeryToken()
 
                     <div class="form-actions ">
-                        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+                        <input type="submit" value="Eliminar" class="btn btn-danger" /> 
                         @Html.ActionLink("Volver", "Index")
                     </div>
                 }

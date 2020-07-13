@@ -5,7 +5,9 @@
 
 }
 
-
+<head>
+    <link rel="stylesheet" href="~/Content/css/styles.css">
+</head>
 
 
 
@@ -111,7 +113,7 @@
                     @Html.DisplayFor(modelItem => item.Trabajador.Nombre)
                 </td>
                 <td>
-                    @Html.ActionLink("Asignar  Estacionamiento", "Edit", new { id = item.IdEstacionamiento })
+                   
                 </td>
                 <td>
                     @Html.ActionLink("Detalles Estacionamiento", "Details", new { id = item.IdEstacionamiento })

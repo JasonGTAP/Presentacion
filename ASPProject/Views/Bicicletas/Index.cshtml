@@ -39,7 +39,7 @@
     </div>
 
 
-    @{if (Session["Registro"] !=null)
+    @{if (Session["Registro"] != null)
         {
 
             <div class="alert alert-success text-center" role="alert">
@@ -51,6 +51,7 @@
         } }
 
 
+  
     <div class="modal-body">
         <p class="text-center"> @Html.ActionLink("Crear nueva Bicicleta ", "Create")</p>
 
@@ -87,7 +88,7 @@
                 {
                     <tr>
 
-
+                      
 
                         <td>
                             @Html.DisplayFor(modelItem => item.Marca)

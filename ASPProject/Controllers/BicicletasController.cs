@@ -35,6 +35,7 @@ namespace ASPProject.Controllers
 
             List<Bicicleta> listado = db.Bicicleta.Where(x => x.idUsuario == id).ToList();
 
+      
             // var bicicleta = db.Bicicleta.Include(b => b.Usuario);
             // return View(bicicleta.ToList());
             return View(listado);
@@ -46,13 +47,13 @@ namespace ASPProject.Controllers
 
 
         [HttpPost]
-        public ActionResult SubirBicicleta(HttpPostedFileBase file, string marca, string color, string modelo)
+        public ActionResult SubirBicicleta(HttpPostedFileBase file, string color, string modelo)
         {
             Bicicleta bicicletadb = new Bicicleta();
 
 
             int id = (int)Session["ID"];
-
+            Usuario usu = db.Usuario.Find(id);
 
 
             string relativo = "/Content/img/";
@@ -61,7 +62,7 @@ namespace ASPProject.Controllers
             foto = relativo + file.FileName;
 
             bicicletadb.idUsuario = id;
-            bicicletadb.Marca = marca;
+            bicicletadb.Marca = usu.NombreUsuario;
             bicicletadb.Color = color;
             bicicletadb.Modelo = modelo;
 

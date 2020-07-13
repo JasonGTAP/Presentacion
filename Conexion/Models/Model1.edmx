@@ -33,8 +33,12 @@
             <PropertyRef Name="IdReporte" />
           </Key>
           <Property Name="IdReporte" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FechaReporte" Type="date" Nullable="false" />
+          <Property Name="LugarEstacionamiento" Type="int" Nullable="false" />
+          <Property Name="FechaEntrada" Type="date" Nullable="false" />
+          <Property Name="FechaSalida" Type="date" Nullable="false" />
           <Property Name="idEstacionamiento" Type="int" Nullable="false" />
+          <Property Name="NombreUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NombreTrabajador" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Trabajador">
           <Key>
@@ -163,11 +167,6 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Trabajador" EntitySet="Trabajador" />
           </AssociationSet>
-          <EntitySet Name="Reporte" EntityType="ProyectoInacapModel.Reporte" />
-          <AssociationSet Name="FK_Reporte_Estacionamiento" Association="ProyectoInacapModel.FK_Reporte_Estacionamiento">
-            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
-            <End Role="Reporte" EntitySet="Reporte" />
-          </AssociationSet>
           <EntitySet Name="Bicicleta" EntityType="ProyectoInacapModel.Bicicleta" />
           <AssociationSet Name="FK_Bicicleta_Usuario" Association="ProyectoInacapModel.FK_Bicicleta_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -176,6 +175,11 @@
           <AssociationSet Name="FK_Estacionamiento_Bicicleta" Association="ProyectoInacapModel.FK_Estacionamiento_Bicicleta">
             <End Role="Bicicleta" EntitySet="Bicicleta" />
             <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+          </AssociationSet>
+          <EntitySet Name="Reporte" EntityType="ProyectoInacapModel.Reporte" />
+          <AssociationSet Name="FK_Reporte_Estacionamiento" Association="ProyectoInacapModel.FK_Reporte_Estacionamiento">
+            <End Role="Estacionamiento" EntitySet="Estacionamiento" />
+            <End Role="Reporte" EntitySet="Reporte" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Trabajador">
@@ -201,8 +205,8 @@
           <Property Name="idBicicleta" Type="Int32" Nullable="false" />
           <Property Name="idTrabajador" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Trabajador" Relationship="ProyectoInacapModel.FK_Estacionamiento_Trabajador" FromRole="Estacionamiento" ToRole="Trabajador" />
-          <NavigationProperty Name="Reporte" Relationship="ProyectoInacapModel.FK_Reporte_Estacionamiento" FromRole="Estacionamiento" ToRole="Reporte" />
           <NavigationProperty Name="Bicicleta" Relationship="ProyectoInacapModel.FK_Estacionamiento_Bicicleta" FromRole="Estacionamiento" ToRole="Bicicleta" />
+          <NavigationProperty Name="Reporte" Relationship="ProyectoInacapModel.FK_Reporte_Estacionamiento" FromRole="Estacionamiento" ToRole="Reporte" />
         </EntityType>
         <Association Name="FK_Estacionamiento_Trabajador">
           <End Type="ProyectoInacapModel.Trabajador" Role="Trabajador" Multiplicity="1" />
@@ -245,27 +249,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Reporte">
-          <Key>
-            <PropertyRef Name="IdReporte" />
-          </Key>
-          <Property Name="IdReporte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FechaReporte" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="idEstacionamiento" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Estacionamiento" Relationship="ProyectoInacapModel.FK_Reporte_Estacionamiento" FromRole="Reporte" ToRole="Estacionamiento" />
-        </EntityType>
-        <Association Name="FK_Reporte_Estacionamiento">
-          <End Type="ProyectoInacapModel.Estacionamiento" Role="Estacionamiento" Multiplicity="1" />
-          <End Type="ProyectoInacapModel.Reporte" Role="Reporte" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estacionamiento">
-              <PropertyRef Name="IdEstacionamiento" />
-            </Principal>
-            <Dependent Role="Reporte">
-              <PropertyRef Name="idEstacionamiento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Bicicleta">
           <Key>
             <PropertyRef Name="IdBicicleta" />
@@ -300,6 +283,31 @@
             </Principal>
             <Dependent Role="Estacionamiento">
               <PropertyRef Name="idBicicleta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Reporte">
+          <Key>
+            <PropertyRef Name="IdReporte" />
+          </Key>
+          <Property Name="IdReporte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LugarEstacionamiento" Type="Int32" Nullable="false" />
+          <Property Name="FechaEntrada" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaSalida" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idEstacionamiento" Type="Int32" Nullable="false" />
+          <Property Name="NombreUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NombreTrabajador" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Estacionamiento" Relationship="ProyectoInacapModel.FK_Reporte_Estacionamiento" FromRole="Reporte" ToRole="Estacionamiento" />
+        </EntityType>
+        <Association Name="FK_Reporte_Estacionamiento">
+          <End Type="ProyectoInacapModel.Estacionamiento" Role="Estacionamiento" Multiplicity="1" />
+          <End Type="ProyectoInacapModel.Reporte" Role="Reporte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estacionamiento">
+              <PropertyRef Name="IdEstacionamiento" />
+            </Principal>
+            <Dependent Role="Reporte">
+              <PropertyRef Name="idEstacionamiento" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -348,15 +356,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Reporte">
-            <EntityTypeMapping TypeName="ProyectoInacapModel.Reporte">
-              <MappingFragment StoreEntitySet="Reporte">
-                <ScalarProperty Name="idEstacionamiento" ColumnName="idEstacionamiento" />
-                <ScalarProperty Name="FechaReporte" ColumnName="FechaReporte" />
-                <ScalarProperty Name="IdReporte" ColumnName="IdReporte" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Bicicleta">
             <EntityTypeMapping TypeName="ProyectoInacapModel.Bicicleta">
               <MappingFragment StoreEntitySet="Bicicleta">
@@ -366,6 +365,19 @@
                 <ScalarProperty Name="Color" ColumnName="Color" />
                 <ScalarProperty Name="Marca" ColumnName="Marca" />
                 <ScalarProperty Name="IdBicicleta" ColumnName="IdBicicleta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reporte">
+            <EntityTypeMapping TypeName="ProyectoInacapModel.Reporte">
+              <MappingFragment StoreEntitySet="Reporte">
+                <ScalarProperty Name="NombreTrabajador" ColumnName="NombreTrabajador" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="idEstacionamiento" ColumnName="idEstacionamiento" />
+                <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
+                <ScalarProperty Name="FechaEntrada" ColumnName="FechaEntrada" />
+                <ScalarProperty Name="LugarEstacionamiento" ColumnName="LugarEstacionamiento" />
+                <ScalarProperty Name="IdReporte" ColumnName="IdReporte" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
